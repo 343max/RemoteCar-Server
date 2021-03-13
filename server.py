@@ -30,6 +30,8 @@ def adjust_camera(h, v):
   h = min(h_max, max(h_min, h))
   v = min(v_max, max(v_min, v))
 
+  print('cam: {h}, {v}'.format(h=h, v=v))
+
   camera_pwm.set_pwm(h_channel, 0, h)
   camera_pwm.set_pwm(v_channel, 0, v)
 
@@ -56,7 +58,7 @@ async def steer(sid, data):
 
 @sio.event
 async def camera(sid, data):
-  adjust_camera(data['horizontal'], data['vertical'])
+  adjust_camera(data['h'], data['v'])
 
 @sio.event
 def disconnect(sid):
