@@ -16,11 +16,12 @@ h_channel = 0
 v_channel = 1
 
 v_min = 100
-v_max = 250
+v_max = 1000
+v_middle = 834
 
-h_min = 100
-h_max = 580
-h_middle = 320
+h_min = 300
+h_max = 1850
+h_middle = 1120
 
 def drive(l, r):
   kit.motor1.throttle = 0-r
@@ -49,7 +50,8 @@ async def connect(sid, environ):
     "h_middle": h_middle,
     "h_max": h_max,
     "v_min": v_min,
-    "v_max": v_max
+    "v_max": v_max,
+    "v_middle": v_middle
   }})
 
 @sio.event
@@ -70,5 +72,5 @@ atexit.register(reset)
 
 if __name__ == '__main__':
   reset()
-  adjust_camera(h_middle, v_min)
+  adjust_camera(h_middle, v_middle)
   web.run_app(app)
